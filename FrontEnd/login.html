@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Sophie Bluel - Architecte d'intérieur</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="./scripts/login-flow.js" defer></script>
+</head>
+<body>
+    <header>
+        <a href="index.html"> <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a>
+        <nav>
+            <ul>
+                <li>projets</li>
+                <li>contact</li>
+                <li>login</li>
+                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+            </ul>
+        </nav>
+    </header> 
+    <main>
+        <form class="login">
+            <h1>Log In</h1>
+            <div class="container">
+                <div class="email">
+                    <label for="email">Email</label>
+                    <input
+                     type="email"
+                     name="email"
+                     id="email"
+                     pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                     placeholder=""
+                     required>
+                </div>
+                <div class="password">
+                    <label for="password">Mot de passe</label>
+                    <input
+                     type="password" 
+                     name="password" 
+                     id="password" 
+                     placeholder="" 
+                     minlength="6"
+                     required>
+                </div>
+                <div class="error__wrapper hidden">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p class="error hidden"></p>
+                </div>
+                <button class="btn--login">Se connecter</button>
+                <aside>
+                    <a href="#"><p class="forgotten">Mot de passe oublié?</p></a>
+                </aside>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li>Mentions Légales</li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+</html>
