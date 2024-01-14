@@ -204,7 +204,8 @@ a{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 3.75rem;
+	gap: 1.75rem;
+	margin-bottom: 250px;
 }
 
 .email, .password {
@@ -230,14 +231,14 @@ a{
 .login > .container {
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
+	gap: 17px;
 }
 
 .login aside {
 	text-align: center;
 }
 
-.login button {
+.login .btn--login {
 	background: #1D6154;
 	color: white;
 	border-radius: 60px;
@@ -249,7 +250,10 @@ a{
 	width: 50%;
 	margin: auto;
 }
-
+.login .btn--login:hover {
+	background: white;
+	color: #1D6154;
+}
 /* .login input[type="email"] {
 	transition: background-color 0.5s;
 }  */
@@ -258,52 +262,51 @@ a{
 	border: 2px solid red;
 }
 
-.login > .container {
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-}
-
-.login aside {
-	text-align: center;
-}
-
-.login button {
-	background: #1D6154;
-	color: white;
-	border-radius: 60px;
-	border: 2px solid #1D6154;
-	padding: .5em 0;
-	font-family: 'Syne';
-	font-size: 16px;
-	font-weight: 700; 
-	width: 50%;
-	margin: auto;
-}
 
 a:visited {
 	color: inherit; /* Use the default text color for visited links */
 }
 
-.login .error__wrapper {
-	background-color: red;
-	color: white;
-	height: 2rem;
-	display: flex;
-	align-items: center;
-}
-
-
-.error__wrapper > i {
-	padding: 0 .5rem;
-}
-
-.error__wrapper.hidden {
-	display: none;
-}
 
 .forgotten{
 	color: #3D3D3D;
 	text-decoration: underline;
 }
 
+/***** code filtre ****************************/
+.filter {
+	display: inline-flex;
+	margin-left: 27%;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 4em;
+
+}
+
+.filter__btn {	
+font-family: 'Syne';
+font-style: normal;	
+font-weight: 700;	
+font-size: 16px;	
+line-height: 19px;	
+border: 1px solid #1D6154;
+border-radius: 60px;	
+text-align: center;
+padding: 10px;
+margin: 0 5px;	
+color: #1D6154;	
+cursor: default;
+}
+.filter__btn:hover {
+background: #1D6154;
+border: 1px solid #1D6154;
+border-radius: 60px;
+color: #FFFFFF;
+}
+.filter__btn-active {
+	background: #1D6154;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	color: #FFFFFF;
+	}
+/*****fin code filtre****************************/
