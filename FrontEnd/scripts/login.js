@@ -1,59 +1,93 @@
-console.log("je suis bien dans mon fichier login.js")
+const alredyLoggedError = document.querySelector(".alredyLogged__error"); 
+const loginEmailError = document.querySelector(".loginEmail__error"); 
+const loginMdpError = document.querySelector(".loginMdp__error"); 
 
-document.addEventListener("DOMContentLoaded", function () {
-    
-    // Partie pour gérer le formulaire de connexion
-    const loginForm = document.getElementById("login");
-    const loginURL = "http://localhost:5678/api/users/login";
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const errorContainer = document.getElementById("error-message");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
 
-    console.log(loginForm);
-    console.log(emailInput);
-    console.log(passwordInput);
-    
-    if (loginForm) {
-        loginForm.addEventListener("submit", async function (event) {
-            event.preventDefault();
+const submit = document.getElementById("submit");
 
-            console.log("Form submitted");
-        
-            // récupérées l'email et password
-            const email = emailInput.value;
-            const password = passwordInput.value;
+alredyLogged();
 
-            try {
-           
-           //(email et password) au format JSON.
-                const response = await fetch(loginURL, {
-                    method: "POST",
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json;charset=utf-8",
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-
-                if (response.ok) {
-
-                    const userData = await response.json();
-
-                    localStorage.setItem("token", userData.token);
-
-                    window.location.href = "./index.html";
-                
-                } else if (response.status === 401) {
-                    errorContainer.textContent = "Combinaison email/mot de passe incorrecte";
-                } else {
-                    errorContainer.textContent = "Une erreur s'est produite lors de la connexion. Veuillez réessayer.";
-                    console.error('Erreur lors de la connexion:', response.statusText);
-                }
-            } catch (error) {
-                errorContainer.textContent = "Une erreur inattendue s'est produite lors de la connexion. Veuillez réessayer.";
-                console.error('Erreur inattendue lors de la connexion:', error.message);
-            }
-        });
+// Si l'utilisateur est déjà connecté, on supprime le token
+function alredyLogged() {
+    console.log('je suis dans la fonction alredyLogged');
+    if (localStorage.getItem("token")) {
+        localStorage.removeItem("token");
+        console.log('je suis dans le if de la fonction alredyLogged');
+        const p = document.createElement("p");
+        p.innerHTML = "<br><br><br>Vous avez été déconnecté, veuillez vous reconnecter";
+        alredyLoggedError.appendChild(p);
+        return;
     }
+}
 
-});
+// Au clic, on envoie les valeurs de connexion
+submit.addEventListener("click", () => {
+    let user = {
+        email: email.value,
+        password: password.value
+       
+    };
+    console.log('le mot de passe est lemail sont :'+email+' et '+password);
+    login(user);
+})
+
+// Fonction de connexion
+function login(id) {
+    console.log('le id est : '+id);
+    console.log("je suis dans la fonction login");
+
+    loginEmailError.innerHTML = "";
+    loginMdpError.innerHTML = "";
+    // véeification de l'email
+    if (!id.email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g)) {
+        const p = document.createElement("p");
+        p.innerHTML = "Veuillez entrer une adresse mail valide";
+        loginEmailError.appendChild(p);
+        return;
+    }
+    // vérifcation du mot de passe
+    if (id.password.length < 5 && !id.password.match(/^[a-zA-Z0-9]+$/g)) {
+        const p = document.createElement("p");
+        p.innerHTML = "Veuillez entrer un mot de passe valide";
+        loginMdpError.appendChild(p);
+        return;
+    }
+    else {
+    // verification de l'email et du mot de passe
+    fetch('http://localhost:5678/api/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8' 
+        },
+        body: JSON.stringify(id)
+    })
+    .then(response => response.json())
+    .then(result => { 
+       
+        console.log(result);
+        console.log("le resultat est : "+result);
+        // Si couple email/mdp incorrect
+        if (result.error || result.message) {
+            const p = document.createElement("p");
+            p.innerHTML = "La combinaison e-mail/mot de passe est incorrecte";
+            loginMdpError.appendChild(p);
+
+        // Si couple email/mdp correct
+        } else if (result.token) {
+            console.log('le mail est mot de passe sont correct');
+            console.log('le token est : '+result.token);
+            localStorage.setItem("token", result.token);
+            window.location.href = "../index.html";
+        }
+    
+    })
+    // prevenir l'utilisateur en cas d'erreur
+    
+    .catch(error => 
+        console.log(error));
+       
+
+}
+}
