@@ -10,20 +10,19 @@
 	<meta name="description" content="">
 	 <link rel="stylesheet" href="./assets/style.css">
 	 <script src="https://kit.fontawesome.com/73db696eb9.js" crossorigin="anonymous"></script> 
-	<script src="./scripts/works.js" defer></script>
+	 <script src="./scripts/works.js" defer></script>
 </head>
 <body>
 
 
-<header>
-		<!-- MODULE ADMIN -->
-<aside class="admin__rod admin__modifer" >
+<!-- MODULE ADMIN --------------------------------------------------------------- -->
+<aside class="admin__rod admin__modifer" aria-hidden="true" style="display: none;"  >
 	<div class="admin__modifer">
 		<i class="fa-solid fa-pen-to-square"></i>
 		<p>Mode édition</p>
 	</div>
 </aside>
-<aside id="modale" class="modale" aria-hidden="true" style="display: none;">
+<aside id="modale" class="modale" aria-hidden="true" style="display: none;" >
 	<div class="modale-wrapper js-modale-stop">
 		<a href="" class="js-modale-close">
 			<i class="fa-solid fa-xmark"></i>
@@ -32,17 +31,62 @@
 		<div class="js-admin-projets">
 			<!-- generation des photos dynamiquement -->
 		</div>
-		<a href="#modaleProjet" class="js-modale-projet">Ajouter un projet</a>
-		<a class="btn-clear-admin" href="#">Supprimer la galerie</a>	
+		<a href="#modaleProjet" class="js-modale-projet">Ajouter une photo</a>
 	</div>
 </aside>
-<!-- FIN MODULE ADMIN -->
+<aside id="modaleProjet" class="modale-projet" aria-hidden="true" style="display: none;" >
+	<div class="modale-wrapper js-modale-stop">
+		<div class="modale-projet-logo">
+			<a href="" class="js-modale-return">
+				<i class="fa-solid fa-arrow-left"></i>
+			</a>
+			<a href="" class="js-modale-close">
+				<i class="fa-solid fa-xmark"></i>
+			</a>
+		</div>
+
+		<h2>Ajout photo</h2>
+
+		<form class="modale-projet-form" action="" enctype="multipart/form-data">
+
+			<div class="form-group-photo">
+				<i class="fa-regular fa-image"></i>
+				<label for="photo">+ Ajouter une photo</label>
+				<input type="file" name="photo" id="photo" class="js-image">
+			</div>
+
+			<div class="form-group-title">
+				<label for="titre">Titre</label>
+				<input class="js-title" type="text" name="titre" id="titre">
+			</div>
+
+			<div class="form-group-id">
+				<label for="categorie">Catégorie</label>
+				
+				<select name="categorie" id="categorie" class="js-categoryId">
+					<option value=""selected disabled hidden></option>
+					<option value="1">Objets</option>
+					<option value="2">Appartements</option>
+					<option value="3">Hôtels & restaurants</option>
+				</select>
+			</div>
+
+			<input type="submit" class="js-add-work" value="Valider">
+		</form>
+	</div>
+</aside>
+
+
+<!-- FIN MODULE ADMIN ------------------------------------------------------------------>
+
+<header>
+
 	<h1 id="test">Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li><a href="#portfolio">projets</a></li>
 			<li><a href="#contact">contact</a></li>
-			<li><a href="login.html">login</a></li>
+			<li class="js-alredy-logged"><a href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -60,8 +104,15 @@
 		</article>
 	</section>
 	<section id="portfolio">
+		<div class="portfolio-title">
 		<h2>Mes Projets</h2>
 
+		<!-- Ajout du bouton modifier -->
+		<div class="admin__modifer" >
+			<i class="fa-solid fa-pen-to-square"></i>
+			<a href="#modale" class="js-modale">Modifier</a>
+		</div>
+	  </div>
 		<!-- <div class="filter">
 			<p class="tous filter-boutton filter-boutton-active"  >Tous</p>
 			<p class="objets filter-boutton" >Objets</p>

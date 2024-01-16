@@ -1,6 +1,4 @@
 // >>> GENERATION DES PROJETS
-console.log('je suis bien dans le fichier works.js');
-
 
 const btnAll = document.querySelector(".filter__btn-id-all");
 const btnId1 = document.querySelector(".filter__btn-id-1");
@@ -41,7 +39,6 @@ async function generationProjets(id) {
 
     if ((id===1) || (id===2) || (id===3)){
         works = works.filter(works => works.categoryId === id);
-        console.log("le data filter est : "+works.categoryId);
     }
 
      // Change la couleur du bouton en fonction du filtre
