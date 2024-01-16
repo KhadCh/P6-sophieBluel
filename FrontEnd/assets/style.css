@@ -124,7 +124,7 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	
 }
 .gallery {
 	width: 100%;
@@ -333,3 +333,210 @@ color: #FFFFFF;
   .admin__rod .admin__modifer {
 	color: white;
   }
+
+  .portfolio-title{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 30px;
+	gap:20px;
+}
+
+/* Modale galerie Photo */
+
+
+.modale{
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+
+	animation: fadeIn 0.2s both;
+}
+.modale-wrapper{
+	display: flex;
+	flex-direction: column;
+
+	overflow: auto;
+	max-width: calc(98vh - 20px);
+	max-height: calc(98vh - 20px);
+	width: 675px;
+	padding: 30px;
+	background-color: white;
+    border-radius: 10px;
+	animation: slideFromTop 0.2s both;
+}
+
+.js-modale-close{
+	display: flex;
+	justify-content: flex-end;
+}
+.modale-wrapper h2{
+	display: flex;
+	justify-content: center;
+	margin: 20px 0 50px 0;
+	font-family: Work Sans; 
+	color: black;
+	font-size: 26px; 
+	font-weight: 400; 
+}
+.js-admin-projets::after{
+	display: flex;
+	
+	content: " ";
+	border-top: 1px solid black;
+	height: 1px;
+	width: 90%;
+	margin: 40px auto;
+}
+
+.js-admin-projets{
+	width: 550px;
+	margin: 10px auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+.modale .js-modale-projet{	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	border: 2px solid #1D6154;
+	margin: 0 auto 30px auto;
+	height: 50px;
+	width: 250px;
+	border-radius: 60px ;
+	transition: all 0.5s ease;
+}
+
+/* MODALE AJOUT PROJET */
+
+
+.modale-projet{
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+
+	animation: fadeIn 0.4s both;
+}
+.modale-projet-logo{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.modale-projet-form{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.form-group-photo{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	background-color: #E8F1F7;
+	width: 500px;
+	height: 200px;
+	border-radius: 10px;
+}
+.form-group-photo i{
+	color: #306685;
+	font-size: 90px;
+	font-weight: 100;
+	margin: 20px;
+	margin-top: -25px;
+}
+.form-group-photo input {
+	display: none;
+}
+.form-group-photo label {
+	font-family: 'work sans';
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+	height: 40px;
+	background-color: #EBF1F6;
+	color: #306685;
+	border-radius: 50px;
+	cursor: pointer;
+	margin-top: -10px;
+}
+.form-group-photo::after {
+	content: "jpg, png : 4mo max";
+	position: absolute;
+	top: 315px;
+}
+.form-group-title{
+	display: flex;
+	flex-direction: column;
+	width: 500px;
+}
+.form-group-title input{
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.form-group-title label{
+	margin: 3em 0 1em 0;
+}
+.form-group-id{
+	display: flex;
+	flex-direction: column;
+	width: 500px;
+}
+.form-group-id select{
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	background-color: white;
+}
+.form-group-id label{
+	margin: 3em 0 1em 0;
+}
+
+.modale-projet-form input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	border: 2px solid #1D6154;
+	margin: 120px 0 30px 0;
+	height: 50px;
+	width: 250px;
+	text-align: center;
+	border-radius: 60px ;
+	transition: all 0.5s ease;
+}
+
+
+.modale-projet-form::after{
+	content: " ";
+	border-top: 1px solid #B3B3B3;
+	height: 1px;
+	width: 47%;
+	margin: 50px auto;
+	position: absolute;
+	bottom: 120px;
+}
