@@ -7,87 +7,72 @@ const password = document.getElementById("password");
 
 const submit = document.getElementById("submit");
 
-alredyLogged();
-
-// Si l'utilisateur est déjà connecté, on supprime le token
-function alredyLogged() {
-    console.log('je suis dans la fonction alredyLogged');
-    if (localStorage.getItem("token")) {
-        localStorage.removeItem("token");
-        console.log('je suis dans le if de la fonction alredyLogged');
-        const p = document.createElement("p");
-        p.innerHTML = "<br><br><br>Vous avez été déconnecté, veuillez vous reconnecter";
-        alredyLoggedError.appendChild(p);
-        return;
-    }
-}
 
 // Au clic, on envoie les valeurs de connexion
-submit.addEventListener("click", () => {
+
+submit.addEventListener("click", function (event) {
+    
+    event.preventDefault();
     let user = {
         email: email.value,
         password: password.value
        
     };
-    console.log('le mot de passe est lemail sont :'+email+' et '+password);
+    console.log("jai bien cliqué sur submit ");
     login(user);
-})
+});
+    
+  async function login(id) {
 
-// Fonction de connexion
-function login(id) {
-    console.log('le id est : '+id);
-    console.log("je suis dans la fonction login");
-
-    loginEmailError.innerHTML = "";
-    loginMdpError.innerHTML = "";
-    // véeification de l'email
-    if (!id.email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g)) {
-        const p = document.createElement("p");
-        p.innerHTML = "Veuillez entrer une adresse mail valide";
-        loginEmailError.appendChild(p);
-        return;
-    }
-    // vérifcation du mot de passe
-    if (id.password.length < 5 && !id.password.match(/^[a-zA-Z0-9]+$/g)) {
-        const p = document.createElement("p");
-        p.innerHTML = "Veuillez entrer un mot de passe valide";
-        loginMdpError.appendChild(p);
-        return;
-    }
-    else {
-    // verification de l'email et du mot de passe
-    fetch('http://localhost:5678/api/users/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8' 
-        },
-        body: JSON.stringify(id)
-    })
-    .then(response => response.json())
-    .then(result => { 
-       
-        console.log(result);
-        console.log("le resultat est : "+result);
-        // Si couple email/mdp incorrect
-        if (result.error || result.message) {
+        try {
+          const response = await fetch("http://localhost:5678/api/users/login", {
+            method: "POST", // or 'PUT'
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(id),
+          });
+      
+          const result = await response.json();
+          console.log("Success:", result);
+        
+          // Si couple email/mdp est incorrect
+          if (result.error || result.message) {
             const p = document.createElement("p");
             p.innerHTML = "La combinaison e-mail/mot de passe est incorrecte";
             loginMdpError.appendChild(p);
 
         // Si couple email/mdp correct
-        } else if (result.token) {
-            console.log('le mail est mot de passe sont correct');
-            console.log('le token est : '+result.token);
+           } else if (result.token) {
             localStorage.setItem("token", result.token);
-            window.location.href = "../index.html";
-        }
-    
-    })
-    // prevenir l'utilisateur en cas d'erreur
-    
-    .catch(error => 
-        console.log(error));
-       
+            window.location.href = "index.html";
+           }
+        
+        
+        } catch (error) {
+          console.error("Error:", error);
+        }    
 
 }
-}
+
+
+
+
+// // Récupération du token
+// const token = localStorage.getItem("token");
+// const AlredyLogged = document.querySelector(".js-alredy-logged");
+
+// adminPanel()
+// // Gestion de l'affichage des boutons admin
+// function adminPanel() {
+//     document.querySelectorAll(".admin__modifer").forEach(a => {
+//         if (token === null) {
+//             return;
+//         }
+//         else {
+//             a.removeAttribute("aria-hidden")
+//             a.removeAttribute("style")
+//             AlredyLogged.innerHTML = "deconnexion";
+//         }
+//     });
+// }
