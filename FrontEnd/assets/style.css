@@ -254,23 +254,19 @@ a{
 	background: white;
 	color: #1D6154;
 }
-/* .login input[type="email"] {
-	transition: background-color 0.5s;
-}  */
-
-.login input:not(:focus):not(:placeholder-shown):invalid {
-	border: 2px solid red;
-}
-
 
 a:visited {
 	color: inherit; /* Use the default text color for visited links */
 }
 
-
 .forgotten{
 	color: #3D3D3D;
 	text-decoration: underline;
+}
+.loginMdp__error, 
+.loginEmail__error{ 
+	color: red;
+    padding: 12px 10px;
 }
 
 /***** code filtre ****************************/
@@ -279,8 +275,8 @@ a:visited {
 	margin-left: 27%;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 4em;
-
+	/* margin-bottom: 4em; */
+	margin-bottom: 35px;
 }
 
 .filter__btn {	
@@ -309,6 +305,9 @@ color: #FFFFFF;
 	border-radius: 60px;
 	color: #FFFFFF;
 	}
+.filter-hidden{
+	visibility:hidden
+}
 /*****fin code filtre****************************/
 
 /* ADMIN */
@@ -338,8 +337,9 @@ color: #FFFFFF;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 30px;
+	/* margin-bottom: 30px; */
 	gap:20px;
+	padding: 30px 0;
 }
 
 /* Modale galerie Photo */
@@ -356,7 +356,7 @@ color: #FFFFFF;
 
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.3);
 
 	animation: fadeIn 0.2s both;
 }
@@ -367,7 +367,7 @@ color: #FFFFFF;
 	overflow: auto;
 	max-width: calc(98vh - 20px);
 	max-height: calc(98vh - 20px);
-	width: 675px;
+	width: 630px;
 	padding: 30px;
 	background-color: white;
     border-radius: 10px;
@@ -454,12 +454,12 @@ color: #FFFFFF;
 	align-items: center;
 
 	background-color: #E8F1F7;
-	width: 500px;
+	width: 420px;
 	height: 200px;
-	border-radius: 10px;
+	border-radius: 3px;
 }
 .form-group-photo i{
-	color: #306685;
+	color: #CBD6DC;
 	font-size: 90px;
 	font-weight: 100;
 	margin: 20px;
@@ -475,11 +475,11 @@ color: #FFFFFF;
 	align-items: center;
 	width: 200px;
 	height: 40px;
-	background-color: #EBF1F6;
 	color: #306685;
-	border-radius: 50px;
 	cursor: pointer;
 	margin-top: -10px;
+	border-radius: 50px;
+	background: #CBD6DC; 
 }
 .form-group-photo::after {
 	content: "jpg, png : 4mo max";
@@ -489,28 +489,38 @@ color: #FFFFFF;
 .form-group-title{
 	display: flex;
 	flex-direction: column;
-	width: 500px;
+	width: 420px;
 }
-.form-group-title input{
-	height: 50px;
+/*.form-group-title input{
+	height: 51px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
+}*/
 .form-group-title label{
 	margin: 3em 0 1em 0;
 }
 .form-group-id{
 	display: flex;
 	flex-direction: column;
-	width: 500px;
+	width: 420px;
 }
-.form-group-id select{
-	height: 50px;
+.form-group-id select, .form-group-title input{
+	height: 51px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	background-color: white;
+	appearance: none; /*pour enlever le chevron */	
+}
+.form-group-id select, .form-group-title input{
+	color: #444;
+	font-family: "Work Sans";
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	padding: 0 10px;
 }
 .form-group-id label{
 	margin: 3em 0 1em 0;
@@ -535,8 +545,130 @@ color: #FFFFFF;
 	content: " ";
 	border-top: 1px solid #B3B3B3;
 	height: 1px;
-	width: 47%;
+	width: 61%;
 	margin: 50px auto;
 	position: absolute;
 	bottom: 120px;
+}
+
+/* gallery */
+.gallery__item-modale{
+	display: flex;	
+	flex-direction: column;
+	margin: 0 5px;
+	width: 95px;
+}
+
+.gallery__item-modale img{
+	width: 95px;
+	height: 120px;
+	object-fit: cover;
+	margin-bottom: 5px;
+}
+.fa-trash-alt:before, .fa-trash-can:before {
+    /* position: relative; */
+	color: white;
+	background-color: black;
+	padding: 5px;
+	border-radius: 20%;
+}
+.gallery__item-modale p{
+	position: relative;
+	bottom: 116px;
+	left: 68px; 
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+.gallery__item-modale a{
+	position: relative;
+	bottom: 15px;
+}
+
+
+
+
+/* MODALE GALERIE PHOTO  */
+.modale[aria-hidden="true"]{
+	animation-name: fadeOff;
+}
+.modale[aria-hidden="true"] .modale-wrapper{
+	animation-name: slideFromBottom;
+}
+
+@keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+@keyframes slideFromTop {
+	from {transform: translateY(-150px);}
+	to {transform: translateY(0px);}
+}
+
+@keyframes fadeOff {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+@keyframes slideFromBottom {
+	from {transform: translateY(0px);}
+	to {transform: translateY(150px);}
+}
+
+.modale .js-modale-projet:hover{
+	color: #1D6154;
+	background-color: white;
+	scale: 1.05;
+}
+
+
+/* MODALE AJOUT PROJET  */
+.modale-projet[aria-hidden="true"] .modale-wrapper{
+	animation-name: slideFromBottom;
+}
+
+@keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+@keyframes slideFromTop {
+	from {transform: translateX(-150px);}
+	to {transform: translateX(0px);}
+}
+
+@keyframes fadeOff {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+@keyframes slideFromBottom {
+	from {transform: translateY(0px);}
+	to {transform: translateY(150px);}
+}
+
+
+.form-group-photo label:hover {
+	background-color: #306685;
+	color: white;
+}
+.modale-projet-form input[type="submit"]:hover{
+	color: #1D6154;
+	background-color: white;
+	scale: 1.05;
+	cursor: pointer;
+}
+
+
+/*output Image */ 
+
+.output-image{
+	width: 420px;
+	height: 169px;
+	display: flex;
+	justify-content: center;
+	background-color: #E8F1F6;
+	align-items: center;
+	overflow:hidden;
+}
+.output-image img{
+	width: 129px;
+	height: 193px; 
 }
