@@ -11,6 +11,8 @@
 	 <link rel="stylesheet" href="./assets/style.css">
 	 <script src="https://kit.fontawesome.com/73db696eb9.js" crossorigin="anonymous"></script> 
 	 <script src="./scripts/works.js" defer></script>
+	 <script src="./scripts/modale.js" defer></script>
+	
 </head>
 <body>
 
@@ -48,13 +50,16 @@
 		<h2>Ajout photo</h2>
 
 		<form class="modale-projet-form" action="" enctype="multipart/form-data">
-
-			<div class="form-group-photo">
-				<i class="fa-regular fa-image"></i>
-				<label for="photo">+ Ajouter une photo</label>
-				<input type="file" name="photo" id="photo" class="js-image">
-			</div>
-
+			<div class="form-group-photo1">
+				<div class="output-image" aria-hidden="true" style="display: none;">
+					
+				</div> 
+				<div class="form-group-photo" >					
+						<i class="fa-regular fa-image"></i>
+						<label for="photo" class="add-picture">+ Ajouter une photo</label>
+						<input type="file" name="photo" id="photo" class="js-image">				
+				</div>
+            </div>
 			<div class="form-group-title">
 				<label for="titre">Titre</label>
 				<input class="js-title" type="text" name="titre" id="titre">
@@ -108,17 +113,12 @@
 		<h2>Mes Projets</h2>
 
 		<!-- Ajout du bouton modifier -->
-		<div class="admin__modifer" >
+		<div class="admin__modifer" aria-hidden="true" style="display: none;">
 			<i class="fa-solid fa-pen-to-square"></i>
 			<a href="#modale" class="js-modale">Modifier</a>
 		</div>
 	  </div>
-		<!-- <div class="filter">
-			<p class="tous filter-boutton filter-boutton-active"  >Tous</p>
-			<p class="objets filter-boutton" >Objets</p>
-			<p class="appartements filter-boutton" >Appartements</p>
-			<p class="hotels_restaurants Hôtels-&-restaurants filter-boutton" >Hôtels & restaurants</p>
-		</div> -->
+
 		<div class="filter">
 			<p class="filter__btn filter__btn-id-all filter__btn-active ">Tous</p>
 			<p class="filter__btn filter__btn-id-1 ">Objets</p>
