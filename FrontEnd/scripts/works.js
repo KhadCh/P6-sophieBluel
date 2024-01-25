@@ -96,3 +96,46 @@ btnId2.addEventListener("click", () => { // Appartements
 
 btnId3.addEventListener("click", () => { // Hôtels & restaurants
     generationProjets(3);})
+
+
+
+    // // Récupération du token
+// Récupération du token
+const token = localStorage.getItem("token");
+const AlredyLogged = document.querySelector(".js-alredy-logged");
+const filter = document.querySelector("#portfolio .filter");
+
+adminPanel()
+// Gestion de l'affichage des boutons admin
+function adminPanel() {
+    document.querySelectorAll(".admin__modifer").forEach(a => {
+        if (token === null) {
+            return;
+        }
+        else {
+            a.removeAttribute("aria-hidden")
+            a.removeAttribute("style")
+            AlredyLogged.innerHTML = "Logout";
+            filter.classList.add("filter-hidden");
+        }
+    });
+
+}
+
+if (AlredyLogged) {
+    AlredyLogged.addEventListener('click', EtatConnexion);
+}
+
+function EtatConnexion() {
+
+    console.log("j'ai cliqué sur Logout");
+    if (token) {
+        localStorage.removeItem('token');
+        window.location.href = "index.html";
+       // filter.classList.remove("filter-hidden");
+        // Met à jour l'interface 
+       // updateUI();
+    } else {
+        window.location.href= "login.html"
+    }
+}

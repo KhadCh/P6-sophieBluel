@@ -23,7 +23,8 @@ submit.addEventListener("click", function (event) {
 });
     
   async function login(id) {
-
+            loginEmailError.innerHTML = "";
+            loginMdpError.innerHTML = "";
         try {
           const response = await fetch("http://localhost:5678/api/users/login", {
             method: "POST", // or 'PUT'
@@ -35,12 +36,19 @@ submit.addEventListener("click", function (event) {
       
           const result = await response.json();
           console.log("Success:", result);
-        
+            // véeification de l'email
+            if (!id.email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g)) {
+                const p = document.createElement("p");
+                p.innerHTML = "Veuillez entrer une adresse mail valide";
+                loginEmailError.appendChild(p);
+                return;
+            }
           // Si couple email/mdp est incorrect
           if (result.error || result.message) {
             const p = document.createElement("p");
             p.innerHTML = "La combinaison e-mail/mot de passe est incorrecte";
             loginMdpError.appendChild(p);
+            return;
 
         // Si couple email/mdp correct
            } else if (result.token) {
@@ -58,21 +66,3 @@ submit.addEventListener("click", function (event) {
 
 
 
-// // Récupération du token
-// const token = localStorage.getItem("token");
-// const AlredyLogged = document.querySelector(".js-alredy-logged");
-
-// adminPanel()
-// // Gestion de l'affichage des boutons admin
-// function adminPanel() {
-//     document.querySelectorAll(".admin__modifer").forEach(a => {
-//         if (token === null) {
-//             return;
-//         }
-//         else {
-//             a.removeAttribute("aria-hidden")
-//             a.removeAttribute("style")
-//             AlredyLogged.innerHTML = "deconnexion";
-//         }
-//     });
-// }
