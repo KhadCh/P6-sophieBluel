@@ -413,7 +413,7 @@ color: #FFFFFF;
 	background-color: #1D6154;
 	border: 2px solid #1D6154;
 	margin: 0 auto 30px auto;
-	height: 50px;
+	min-height: 50px;
 	width: 250px;
 	border-radius: 60px ;
 	transition: all 0.5s ease;
@@ -526,19 +526,20 @@ color: #FFFFFF;
 	margin: 3em 0 1em 0;
 }
 
-.modale-projet-form input[type="submit"]{
+ .modale-projet-form .js-add-work{
 	font-family: 'Syne';
 	font-weight: 700;
+	font-size: 14px; 
 	color: white;
-	background-color: #1D6154;
-	border: 2px solid #1D6154;
+	background: #A7A7A7; 
+	border: 2px solid #A7A7A7;
 	margin: 120px 0 30px 0;
 	height: 50px;
 	width: 250px;
 	text-align: center;
 	border-radius: 60px ;
-	transition: all 0.5s ease;
-}
+	/* transition: all 0.5s ease; */
+} 
 
 
 .modale-projet-form::after{
@@ -550,6 +551,14 @@ color: #FFFFFF;
 	position: absolute;
 	bottom: 120px;
 }
+.modale_error_msg{
+	/* background-color: red; */
+	padding: 10px;
+	color: white;
+	width: 260px;
+
+}
+
 
 /* gallery */
 .gallery__item-modale{
