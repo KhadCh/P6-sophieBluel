@@ -147,6 +147,7 @@ async function deleteProjets() {
 ////////////////////////////////////////////////////
 
 // Ouverture de la modale projet
+const formulaire = document.querySelector(".modale-projet-form"); 
 let modaleProjet = null;
 const openModaleProjet = function(e) {
     e.preventDefault()
@@ -162,6 +163,8 @@ const openModaleProjet = function(e) {
     modaleProjet.querySelector(".js-modale-stop").addEventListener("click", stopPropagation)
 
     modaleProjet.querySelector(".js-modale-return").addEventListener("click", backToModale)
+
+    formulaire.reset();
 };
 
 
