@@ -481,10 +481,15 @@ color: #FFFFFF;
 	border-radius: 50px;
 	background: #CBD6DC; 
 }
+/*
 .form-group-photo::after {
 	content: "jpg, png : 4mo max";
 	position: absolute;
 	top: 315px;
+}*/
+.form-group-photo p {
+position: absolute;
+top: 311px;
 }
 .form-group-title{
 	display: flex;
