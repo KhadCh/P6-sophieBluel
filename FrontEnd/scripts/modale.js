@@ -110,6 +110,7 @@ function deleteWork() {
 
     // Supprimer le projet
 async function deleteProjets() {
+   
 
     console.log("DEBUG DEBUT DE FUNCTION SUPRESSION")
     console.log(this.classList[0])
@@ -148,7 +149,9 @@ async function deleteProjets() {
 
 // Ouverture de la modale projet
 const formulaire = document.querySelector(".modale-projet-form"); 
+const modaleErrorMsg = document.querySelector(".modale_error_msg"); 
 let modaleProjet = null;
+
 const openModaleProjet = function(e) {
     e.preventDefault()
     modaleProjet = document.querySelector(e.target.getAttribute("href"))
@@ -165,6 +168,8 @@ const openModaleProjet = function(e) {
     modaleProjet.querySelector(".js-modale-return").addEventListener("click", backToModale)
 
     formulaire.reset();
+    modaleErrorMsg.innerHTML='';
+    modaleErrorMsg.style.background="white";
 };
 
 
@@ -206,7 +211,7 @@ const title = document.querySelector(".js-title").value;
 const categoryId = document.querySelector(".js-categoryId").value;
 const btnSubmit = document.querySelector(".js-add-work") ;
 const error_msg= document.querySelector(".modale_error_msg");
-
+const fileSize = document.querySelector(".js-fileSize"); 
 
 // Événement lorsque l'utilisateur sélectionne une image
 image.addEventListener('change', function(event) {
@@ -223,11 +228,14 @@ image.addEventListener('change', function(event) {
   faImage.style.display = 'none';
   photoLabel.style.display = 'none';
   descr.style.display = 'none';
-  if (title != "" || categoryId != "" || image != undefined) {
+  fileSize.style.display = 'none';
+  
+  if (title != "" && categoryId != "" && image != undefined) {
     btnSubmit.style.background="#1D6154";
     btnSubmit.style.border="#1D6154";
-
+    btnSubmit.style.color="white";
   } 
+
 });
 
 const btnAjouterProjet = document.querySelector(".js-add-work");
