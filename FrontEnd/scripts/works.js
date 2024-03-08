@@ -132,9 +132,7 @@ function EtatConnexion() {
     if (token) {
         localStorage.removeItem('token');
         window.location.href = "index.html";
-       // filter.classList.remove("filter-hidden");
-        // Met à jour l'interface 
-       // updateUI();
+      
     } else {
         window.location.href= "login.html"
     }
