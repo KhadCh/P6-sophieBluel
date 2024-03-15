@@ -30,7 +30,7 @@ async function generationProjets(id) {
         p.classList.add("error");
         p.innerHTML = "Une erreur est survenue lors de la récupération des projets<br><br>Une tentative de reconnexion automatique auras lieu dans une minute<br><br><br><br>Si le problème persiste, veuillez contacter l'administrateur du site";
         sectionProjets.appendChild(p);
-       // await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise(resolve => setTimeout(resolve, 60000));
         window.location.href = "index.html";
     }
 
@@ -69,7 +69,7 @@ async function generationProjets(id) {
 
             const figure = document.createElement("figure"); 
             sectionProjets.appendChild(figure);
-            figure.classList.add(`js-projet-${works[i].id}`); // Ajoute l'id du projet pour le lien vers la modale lors de la supression 
+            figure.classList.add(`js-projet-${works[i].id}`);
             const img = document.createElement("img");
             img.src = works[i].imageUrl;
             img.alt = works[i].title;
@@ -99,7 +99,7 @@ btnId3.addEventListener("click", () => { // Hôtels & restaurants
 
 
 
-    // // Récupération du token
+
 // Récupération du token
 const token = localStorage.getItem("token");
 const AlredyLogged = document.querySelector(".js-alredy-logged");
@@ -115,7 +115,7 @@ function adminPanel() {
         else {
             a.removeAttribute("aria-hidden")
             a.removeAttribute("style")
-            AlredyLogged.innerHTML = "Logout";
+            AlredyLogged.innerHTML = "Logout"; // change le loggin en logout
             filter.classList.add("filter-hidden");
         }
     });
