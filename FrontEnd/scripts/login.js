@@ -27,7 +27,7 @@ submit.addEventListener("click", function (event) {
             loginMdpError.innerHTML = "";
         try {
           const response = await fetch("http://localhost:5678/api/users/login", {
-            method: "POST", // or 'PUT'
+            method: "POST", 
             headers: {
               "Content-Type": "application/json",
             },
