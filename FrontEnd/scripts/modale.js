@@ -1,5 +1,4 @@
-//import { generationProjets } from "./works.js";
-//import {generationProjets, token} from  "./works.js";
+
 
 // update de la galerie apres suppression et ajout de projet
 const updateSectionProjets = document.querySelector(".gallery"); 
@@ -8,8 +7,7 @@ function resetSectionProjets() {
 }
 // Génère les projets
 async function updateGenerationProjets(id) { 
-    console.log('je suis bien dans le fichier function.js');
-
+   
     try {
         const response = await fetch('http://localhost:5678/api/works'); 
         works = await response.json();
@@ -49,11 +47,12 @@ async function updateGenerationProjets(id) {
 
 }
 
-// Reset la section projets
+// Reset la section projets dans la modale
 function resetmodaleSectionProjets() {  
-    modaleSectionProjets.innerHTML = "";
-   
+    modaleSectionProjets.innerHTML = "";  
 }
+
+// Reset le formulaire d'ajout de photo apres envoi
 function formulaireReset(){
     const container = document.querySelector('.form-group-photo');
 
@@ -70,18 +69,12 @@ function formulaireReset(){
     photoLabel.style = 'display';
     descr.style = 'display';
     fileSize.style = 'display';
-    //preventDefault()
-   // const file=document.querySelector(".js-image").files[0];
-   //document.beatport.reset();
+
     formulaire.reset();
-    //document.getElementById("myform").reset();
-    //file.value='';
-    //input.value='';
     document.getElementById("photo").value = '';
-   document.querySelector(".js-image").files[0] = '';
+    document.querySelector(".js-image").files[0] = '';
     console.log('je suis bien ds la fonction resetFonction');
 }
-
 
 
 
@@ -118,7 +111,7 @@ const openModale = function(e) {
 async function modaleProjets() { 
     const response = await fetch('http://localhost:5678/api/works'); 
     dataAdmin = await response.json();
-      resetmodaleSectionProjets()
+      resetmodaleSectionProjets() 
     for (let i = 0; i < dataAdmin.length; i++) {
         
         const div = document.createElement("div");
@@ -145,10 +138,9 @@ async function modaleProjets() {
 
 //  Ferme la modale
 const closeModale = function(e) {
-    e.preventDefault() //remettre
+    e.preventDefault() 
     if (modale === null) return
 
-    
     modale.setAttribute("aria-hidden", "true")
     modale.removeAttribute("aria-modal")
 
@@ -161,10 +153,10 @@ const closeModale = function(e) {
        resetmodaleSectionProjets()
     }, 30)
 };
+
 // ferme la modale lors de la suppression
-//const closeModaleSuppression= function(e) {
 const closeModaleSuppression= function() {
-   // e.preventDefault() //remettre
+
     if (modale === null) return
 
     modale.setAttribute("aria-hidden", "true")
@@ -180,7 +172,7 @@ const closeModaleSuppression= function() {
     }, 30)
 };
 
-// Définit la "border" du click pour fermer la modale
+
 const stopPropagation = function(e) {
     e.stopPropagation()
 };
@@ -210,25 +202,18 @@ function deleteWork() {
     // Supprimer le projet
 async function deleteProjets() {
 
-    //console.log("DEBUG DEBUT DE FUNCTION SUPRESSION")
-   // console.log(this.classList[0])
- 
-
     await fetch(`http://localhost:5678/api/works/${this.classList[0]}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}`},
     })
-
     .then (response => {
-       // console.log(response)
+    
         // Token good
         if (response.status === 204) {
-            //generationProjets('all');
+    
             updateGenerationProjets('all');
-            closeModaleSuppression(); // ferme la modale sans eventDefault
-          // preventDefault();
-           
-            console.log("DEBUG SUPPRESION DU PROJET " + this.classList[0])
+            closeModaleSuppression(); // ferme la modale sans eventDefault 
+            console.log(" SUPPRESION DU PROJET " + this.classList[0])
            
         }
         // Token inorrect
@@ -248,11 +233,11 @@ async function deleteProjets() {
 ////////////////////////////////////////////////////
 
 // Ouverture de la modale projet
-//const formulaire = document.querySelector(".modale-projet-form"); 
+
 const modaleErrorMsg = document.querySelector(".modale_error_msg"); 
 let modaleProjet = null;
 const openModaleProjet = function(e) {
-    e.preventDefault() //remmetre
+    e.preventDefault() 
     modaleProjet = document.querySelector(e.target.getAttribute("href"))
 
     modaleProjet.style.display = null
@@ -274,7 +259,7 @@ const openModaleProjet = function(e) {
 
 // Fermeture de la modale projet
 const closeModaleProjet = function(e) {
-   // e.preventDefault() ;
+  
     if (modaleProjet === null) return
 
     modaleProjet.setAttribute("aria-hidden", "true")
@@ -290,9 +275,9 @@ const closeModaleProjet = function(e) {
     generationProjets('all');
 };
 
-// Retour au modale admin
+// Retour au modale 
 const backToModale = function(e) {
-    e.preventDefault() // remettre
+    e.preventDefault() 
     modaleProjet.style.display = "none"
     modaleProjet = null
     resetmodaleSectionProjets()
@@ -303,7 +288,7 @@ const backToModale = function(e) {
 // // INDEX : 5-/ GESTION AJOUT D'UN PROJET        ///
 // ////////////////////////////////////////////////////
 
-//------Aperçu photo avant upload (ajout photo)-------------------------------------------
+//------Aperçu photo avant upload (ajout photo)---------
 
 const image = document.querySelector(".js-image");
 const title = document.querySelector(".js-title").value;
@@ -319,7 +304,6 @@ image.addEventListener('change', function(event) {
   const container = document.querySelector('.form-group-photo');
 
   container.style.background = 'center / contain no-repeat url(' + URL.createObjectURL(file) + '), #E8F1F6';
-  console.log('je suis la au change dans image ');
   const faImage = document.querySelector('.fa-image');
   const photoLabel = document.querySelector('.add-picture');
   const descr = document.querySelector('.js-image');
@@ -331,7 +315,6 @@ image.addEventListener('change', function(event) {
   fileSize.style.display='none';
 
   if (title != "" && categoryId != "" && image != undefined) {
-    console.log('je suis ds lajout de la photo et le test');
     btnSubmit.style.background="red";
     btnSubmit.style.border="#1D6154";
     btnSubmit.style.color='white';
@@ -345,22 +328,21 @@ btnAjouterProjet.addEventListener("click", addWork);
 async function addWork(event) {
     event.preventDefault();
 
-    
     const image = document.querySelector(".js-image").files[0];
     const title = document.querySelector(".js-title").value;
     const categoryId = document.querySelector(".js-categoryId").value;
     // Événement lorsque l'utilisateur sélectionne une image
 
     if (title === "" || categoryId === "" || image === undefined) {
-       // alert("Merci de remplir tous les champs");
+
        error_msg.innerHTML = "Merci de remplir tous les champs";
        error_msg.style.background="red";
-    
-        return;
+       return;
+
     } else if (categoryId !== "1" && categoryId !== "2" && categoryId !== "3") {
-       // alert("Merci de choisir une catégorie valide");
         return;
-        } else {
+
+    } else {
     try {
         const formData = new FormData();
         formData.append("title", title);
@@ -376,16 +358,14 @@ async function addWork(event) {
         });
 
         if (response.status === 201) {
-          //  generationProjets('all'); // update de la gallery aprèes ajout de projet
-            updateGenerationProjets('all');
+
+           updateGenerationProjets('all');
            alert("Projet ajouté avec succès :)");
            modaleProjets(dataAdmin);
            formulaireReset();
-          // closeModale();
+       
            closeModaleSuppression();
            closeModaleProjet();
-         //  event.preventDefault();
-    
            formulaire.reset();
            
 
