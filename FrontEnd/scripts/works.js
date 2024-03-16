@@ -17,7 +17,7 @@ function resetSectionProjets() {
 
 // Génère les projets
 async function generationProjets(id) { 
-    console.log('je suis bien dans le fichier function.js');
+   
 
     try {
         const response = await fetch('http://localhost:5678/api/works'); 
@@ -36,7 +36,7 @@ async function generationProjets(id) {
 
     resetSectionProjets()
 
-
+    // filtre des projets
     if ((id===1) || (id===2) || (id===3)){
         works = works.filter(works => works.categoryId === id);
     }

@@ -70,10 +70,10 @@ function formulaireReset(){
     descr.style = 'display';
     fileSize.style = 'display';
 
-    formulaire.reset();
+    //formulaire.reset();
     document.getElementById("photo").value = '';
     document.querySelector(".js-image").files[0] = '';
-    console.log('je suis bien ds la fonction resetFonction');
+    //console.log('je suis bien ds la fonction resetFonction');
 }
 
 
@@ -104,7 +104,7 @@ const openModale = function(e) {
     modale.addEventListener("click", closeModale)
     modale.querySelector(".js-modale-close").addEventListener("click", closeModale)
     modale.querySelector(".js-modale-stop").addEventListener("click", stopPropagation)
-    formulaire.reset();
+   // formulaire.reset();
 };
 
 // Génère les projets dans la modale admin
@@ -133,7 +133,7 @@ async function modaleProjets() {
 
     }
     deleteWork()
-    formulaire.reset();
+   // formulaire.reset();
 }
 
 //  Ferme la modale
@@ -145,7 +145,7 @@ const closeModale = function(e) {
     modale.removeAttribute("aria-modal")
 
     modale.querySelector(".js-modale-close").removeEventListener("click", closeModale)
-    formulaire.reset();
+   // formulaire.reset();
     // Fermeture de la modale apres 400ms 
     window.setTimeout(function() {
         modale.style.display = "none"
@@ -163,7 +163,7 @@ const closeModaleSuppression= function() {
     modale.removeAttribute("aria-modal")
 
     modale.querySelector(".js-modale-close").removeEventListener("click", closeModale)
-    formulaire.reset();
+    //formulaire.reset();
     // Fermeture de la modale apres 400ms 
     window.setTimeout(function() {
         modale.style.display = "none"
@@ -188,9 +188,9 @@ window.addEventListener("keydown", function(e) {
         closeModaleProjet(e)}
 });
 
-////////////////////////////////////////////////////////////
-// INDEX : 3-// GESTION SUPPRESSION D'UN PROJET /////////////
-////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//// GESTION SUPPRESSION D'UN PROJET /////////////
+//////////////////////////////////////////////////
 
 // Event listener sur les boutons supprimer par apport a leur id
 function deleteWork() {
@@ -216,7 +216,7 @@ async function deleteProjets() {
             console.log(" SUPPRESION DU PROJET " + this.classList[0])
            
         }
-        // Token inorrect
+        // Token incorrect
         else if (response.status === 401) {
             alert("Vous n'êtes pas autorisé à supprimer ce projet, merci de vous connecter avec un compte valide")
             window.location.href = "login.html";
@@ -228,9 +228,9 @@ async function deleteProjets() {
 }
 
 
-////////////////////////////////////////////////////
-// INDEX : 4-/ GESTION BOITE MODALE AJOUT PROJET ///
-////////////////////////////////////////////////////
+/////////////////////////////////////////
+// GESTION BOITE MODALE AJOUT PROJET ///
+////////////////////////////////////////
 
 // Ouverture de la modale projet
 
@@ -251,7 +251,7 @@ const openModaleProjet = function(e) {
 
     modaleProjet.querySelector(".js-modale-return").addEventListener("click", backToModale)
 
-    formulaire.reset();
+   // formulaire.reset();
     console.log('le reset a ete effectuer ');
     modaleErrorMsg.innerHTML="";
     modaleErrorMsg.style.background='white';
@@ -281,12 +281,12 @@ const backToModale = function(e) {
     modaleProjet.style.display = "none"
     modaleProjet = null
     resetmodaleSectionProjets()
-    modaleProjets(dataAdmin)
+    modaleProjets()
 };
 
-// ////////////////////////////////////////////////////
-// // INDEX : 5-/ GESTION AJOUT D'UN PROJET        ///
-// ////////////////////////////////////////////////////
+// ////////////////////////////////
+// // GESTION AJOUT D'UN PROJET ///
+// ////////////////////////////////
 
 //------Aperçu photo avant upload (ajout photo)---------
 
@@ -315,7 +315,7 @@ image.addEventListener('change', function(event) {
   fileSize.style.display='none';
 
   if (title != "" && categoryId != "" && image != undefined) {
-    btnSubmit.style.background="red";
+    btnSubmit.style.background="#1D6154";
     btnSubmit.style.border="#1D6154";
     btnSubmit.style.color='white';
   } 
@@ -327,23 +327,18 @@ btnAjouterProjet.addEventListener("click", addWork);
 // Ajouter un projet
 async function addWork(event) {
     event.preventDefault();
-
     const image = document.querySelector(".js-image").files[0];
     const title = document.querySelector(".js-title").value;
     const categoryId = document.querySelector(".js-categoryId").value;
+
     // Événement lorsque l'utilisateur sélectionne une image
-
     if (title === "" || categoryId === "" || image === undefined) {
-
        error_msg.innerHTML = "Merci de remplir tous les champs";
        error_msg.style.background="red";
        return;
 
-    } else if (categoryId !== "1" && categoryId !== "2" && categoryId !== "3") {
-        return;
-
     } else {
-    try {
+      try {
         const formData = new FormData();
         formData.append("title", title);
         formData.append("category", categoryId);
@@ -356,19 +351,13 @@ async function addWork(event) {
             },
             body: formData,
         });
-
         if (response.status === 201) {
-
            updateGenerationProjets('all');
            alert("Projet ajouté avec succès :)");
-           modaleProjets(dataAdmin);
-           formulaireReset();
-       
+           formulaireReset();      
            closeModaleSuppression();
            closeModaleProjet();
-           formulaire.reset();
            
-
         } else if (response.status === 400) {
             alert("Merci de remplir tous les champs");
         } else if (response.status === 500) {

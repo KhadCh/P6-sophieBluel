@@ -36,7 +36,7 @@ submit.addEventListener("click", function (event) {
       
           const result = await response.json();
           console.log("Success:", result);
-            // véeification de l'email
+            // vérification de l'email
             if (!id.email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/g)) {
                 const p = document.createElement("p");
                 p.innerHTML = "Veuillez entrer une adresse mail valide";
