@@ -54,7 +54,10 @@ function resetmodaleSectionProjets() {
 
 // Reset le formulaire d'ajout de photo apres envoi
 function formulaireReset(){
+
     const container = document.querySelector('.form-group-photo');
+   document.querySelector(".js-title").value = '';
+   document.querySelector(".js-categoryId").value = '';
 
     container.style = 'display';
     const image = document.querySelector(".js-image");
@@ -70,10 +73,15 @@ function formulaireReset(){
     descr.style = 'display';
     fileSize.style = 'display';
 
-    //formulaire.reset();
     document.getElementById("photo").value = '';
     document.querySelector(".js-image").files[0] = '';
-    //console.log('je suis bien ds la fonction resetFonction');
+
+    const btnSubmit = document.querySelector(".js-add-work") ;
+    btnSubmit.style.background="#A7A7A7";
+    btnSubmit.style.border="#A7A7A7";
+    btnSubmit.style.color='white';
+    
+    
 }
 
 
@@ -314,7 +322,7 @@ image.addEventListener('change', function(event) {
   descr.style.display = 'none';
   fileSize.style.display='none';
 
-  if (title != "" && categoryId != "" && image != undefined) {
+  if (image != undefined && title != "" && categoryId != ""  ) {
     btnSubmit.style.background="#1D6154";
     btnSubmit.style.border="#1D6154";
     btnSubmit.style.color='white';
@@ -330,6 +338,7 @@ async function addWork(event) {
     const image = document.querySelector(".js-image").files[0];
     const title = document.querySelector(".js-title").value;
     const categoryId = document.querySelector(".js-categoryId").value;
+    const allowedTypes = ['image/png', 'image/jpeg'];
 
     // Événement lorsque l'utilisateur sélectionne une image
     if (title === "" || categoryId === "" || image === undefined) {
@@ -337,7 +346,11 @@ async function addWork(event) {
        error_msg.style.background="red";
        return;
 
-    } else {
+    } else if (!allowedTypes.includes(image.type)) { 
+        alert("Seuls les fichiers PNG et JPEG sont autorisés");
+        formulaireReset();   
+
+    }else{
       try {
         const formData = new FormData();
         formData.append("title", title);
